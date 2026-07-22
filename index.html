@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#090909">
+<title>Jornada Expert XP 2026</title>
+<style>
+  /* ============ RESET & BASE ============ */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :root {
+    --bg: #090909;
+    --card: #181818;
+    --card-elevated: #1f1f1f;
+    --gold: #D4AF37;
+    --gold-dim: rgba(212, 175, 55, 0.35);
+    --gray: #AAAAAA;
+    --gray-dim: #6b6b6b;
+    --white: #FFFFFF;
+    --green: #34C759;
+    --radius-lg: 24px;
+    --radius-md: 18px;
+    --radius-sm: 12px;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--white);
+    height: 100%;
+    overscroll-behavior-y: none;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: calc(96px + var(--safe-bottom));
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: var(--gold-dim);
+  }
+
+  button, input {
+    font-family: inherit;
+  }
+
+  /* ============ HEADER ============ */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: calc(18px + var(--safe-top)) 20px 18px;
+    background: rgba(9, 9, 9, 0.86);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .header-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-subtitle {
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 2px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  /* ============ PROGRESS ============ */
+  .progress-block {
+    margin-top: 18px;
+  }
+
+  .progress-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  .progress-sessions {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 500;
+  }
+
+  .progress-percent {
+    font-size: 15px;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .progress-track {
+    position: relative;
+    height: 10px;
+    background: #232323;
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #B8933A, var(--gold) 60%, #F0D97A);
+    transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  }
+
+  .progress-marks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    padding: 0 1px;
+  }
+
+  .progress-marks span {
+    font-size: 10px;
+    color: var(--gray-dim);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ============ MAIN ============ */
+  main {
+    padding: 24px 20px 8px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  section.block {
+    margin-bottom: 34px;
+  }
+
+  .block-heading {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    padding-left: 4px;
+  }
+
+  /* ============ BADGES ============ */
+  .badges-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .badge {
+    background: var(--card);
+    border-radius: var(--radius-md);
+    padding: 14px 8px 12px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+
+  .badge-icon {
+    font-size: 26px;
+    display: block;
+    filter: grayscale(1) opacity(0.35);
+    transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: scale(0.9);
+  }
+
+  .badge-label {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--gray-dim);
+    margin-top: 8px;
+    letter-spacing: 0.01em;
+    transition: color 0.4s ease;
+  }
+
+  .badge-threshold {
+    display: block;
+    font-size: 9px;
+    color: var(--gray-dim);
+    margin-top: 2px;
+    font-weight: 500;
+    opacity: 0.7;
+  }
+
+  .badge.unlocked {
+    border-color: var(--gold-dim);
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.18);
+    animation: badgePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .badge.unlocked .badge-icon {
+    filter: grayscale(0) opacity(1) drop-shadow(0 0 6px rgba(212, 175, 55, 0.6));
+    transform: scale(1);
+  }
+
+  .badge.unlocked .badge-label {
+    color: var(--gold);
+  }
+
+  @keyframes badgePop {
+    0% { transform: scale(0.85); }
+    55% { transform: scale(1.06); }
+    100% { transform: scale(1); }
+  }
+
+  /* ============ DAY SECTION ============ */
+  .day-count {
+    font-weight: 500;
+    color: var(--gray-dim);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* ============ CARD ============ */
+  .card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: opacity 0.5s ease, border-color 0.5s ease, transform 0.15s ease, background 0.4s ease;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .card:active {
+    transform: scale(0.985);
+  }
+
+  .card.completed {
+    opacity: 0.55;
+    border-color: var(--gold-dim);
+    background: var(--card-elevated);
+  }
+
+  .card-checkbox {
+    flex: 0 0 auto;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    transition: background 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    min-width: 44px;
+    min-height: 44px;
+    margin: -9px -9px -9px -9px;
+  }
+
+  .card-checkbox .circle {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .card.completed .circle {
+    background: var(--green);
+    border-color: var(--green);
+    transform: scale(1.08);
+  }
+
+  .checkmark {
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .card.completed .checkmark {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .card-body {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .card-top-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .card-time {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+
+  .card-icon {
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  .card-title {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    transition: color 0.4s ease;
+  }
+
+  .card.completed .card-title {
+    text-decoration: line-through;
+    text-decoration-color: var(--gold);
+    text-decoration-thickness: 1.5px;
+    color: var(--gray);
+  }
+
+  .card-stage {
+    font-size: 11.5px;
+    color: var(--gray);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .card-desc {
+    font-size: 12.5px;
+    color: var(--gray-dim);
+    margin-top: 3px;
+    line-height: 1.35;
+  }
+
+  /* ============ FOOTER NOTE ============ */
+  .footnote {
+    text-align: center;
+    font-size: 11px;
+    color: var(--gray-dim);
+    padding: 18px 20px 4px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============ REDUCED MOTION ============ */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  /* ============ SMALL WIDTH TUNING ============ */
+  @media (max-width: 374px) {
+    .badges-row { gap: 7px; }
+    .badge { padding: 12px 5px 10px; }
+    .badge-icon { font-size: 22px; }
+    .card { padding: 14px; }
+  }
+
+  /* ============ VIEWS ============ */
+  .view[hidden] {
+    display: none;
+  }
+
+  /* ============ TAB BAR ============ */
+  .tabbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    display: flex;
+    padding: 8px 14px calc(10px + var(--safe-bottom));
+    background: rgba(9, 9, 9, 0.9);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    gap: 6px;
+  }
+
+  .tab-btn {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    background: none;
+    border: none;
+    color: var(--gray-dim);
+    padding: 6px 4px;
+    border-radius: var(--radius-sm);
+    min-height: 44px;
+    transition: color 0.3s ease, background 0.3s ease;
+  }
+
+  .tab-btn .tab-icon {
+    font-size: 19px;
+    line-height: 1;
+    filter: grayscale(1) opacity(0.6);
+    transition: filter 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .tab-btn .tab-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .tab-btn.active {
+    color: var(--gold);
+  }
+
+  .tab-btn.active .tab-icon {
+    filter: grayscale(0) opacity(1);
+    transform: scale(1.08);
+  }
+
+  /* ============ RELATIONSHIP FORM ============ */
+  .form-card {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .field {
+    margin-bottom: 14px;
+  }
+
+  .field:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .field-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+
+  .field-label .optional-tag {
+    font-size: 10.5px;
+    color: var(--gray-dim);
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  .field-label .char-count {
+    font-size: 10.5px;
+    color: var(--gray-dim);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .field-input,
+  .field-textarea {
+    width: 100%;
+    background: #0e0e0e;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    color: var(--white);
+    font-size: 15px;
+    line-height: 1.4;
+    transition: border-color 0.25s ease, background 0.25s ease;
+  }
+
+  .field-input:focus,
+  .field-textarea:focus {
+    outline: none;
+    border-color: var(--gold-dim);
+    background: #121212;
+  }
+
+  .field-input::placeholder,
+  .field-textarea::placeholder {
+    color: var(--gray-dim);
+  }
+
+  .field-textarea {
+    resize: vertical;
+    min-height: 92px;
+    font-family: inherit;
+  }
+
+  .btn-primary {
+    width: 100%;
+    margin-top: 4px;
+    background: linear-gradient(90deg, #B8933A, var(--gold) 60%, #F0D97A);
+    color: #0a0a0a;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    min-height: 44px;
+    transition: transform 0.15s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.25);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  .field-error {
+    font-size: 11.5px;
+    color: #FF6B6B;
+    margin-top: 6px;
+    display: none;
+  }
+
+  .field.invalid .field-input,
+  .field.invalid .field-textarea {
+    border-color: #FF6B6B;
+  }
+
+  .field.invalid .field-error {
+    display: block;
+  }
+
+  /* ============ RECORDS LIST ============ */
+  .records-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-left: 4px;
+  }
+
+  .btn-secondary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--card);
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    min-height: 36px;
+    transition: transform 0.15s ease, background 0.3s ease;
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.96);
+  }
+
+  .btn-secondary:disabled {
+    opacity: 0.4;
+  }
+
+  .record-card {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .record-top-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .record-client {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+
+  .record-account {
+    font-size: 11.5px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .record-date {
+    font-size: 10.5px;
+    color: var(--gray-dim);
+    font-weight: 500;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .record-text {
+    font-size: 13.5px;
+    color: var(--gray);
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .record-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .record-action-btn {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: #0e0e0e;
+    color: var(--gray);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius-sm);
+    padding: 9px;
+    font-size: 12px;
+    font-weight: 600;
+    min-height: 40px;
+    transition: transform 0.15s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .record-action-btn:active {
+    transform: scale(0.96);
+  }
+
+  .record-action-btn.copy:active,
+  .record-action-btn.copy.copied {
+    color: var(--gold);
+    border-color: var(--gold-dim);
+  }
+
+  .record-action-btn.delete:active {
+    color: #FF6B6B;
+    border-color: rgba(255, 107, 107, 0.4);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 36px 20px;
+    color: var(--gray-dim);
+    font-size: 13px;
+  }
+
+  .empty-state .empty-icon {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0.6;
+  }
+
+  /* ============ TOAST ============ */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(90px + var(--safe-bottom));
+    transform: translateX(-50%) translateY(12px);
+    background: #1f1f1f;
+    color: var(--white);
+    border: 1px solid var(--gold-dim);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title" id="headerTitle">🏆 Jornada Expert XP 2026</div>
+  <div class="header-subtitle" id="headerSubtitle">Trilha Premium do Consultor XP</div>
+
+  <div class="progress-block" id="progressBlock">
+    <div class="progress-stats">
+      <span class="progress-sessions" id="sessionsLabel">0 de 14 sessões</span>
+      <span class="progress-percent" id="percentLabel">0% concluído</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-marks">
+      <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="view" id="viewJornada">
+    <section class="block">
+      <div class="block-heading">Sua Evolução</div>
+      <div class="badges-row" id="badgesRow"></div>
+    </section>
+
+    <section class="block">
+      <div class="block-heading">Sexta <span class="day-count" id="friCount"></span></div>
+      <div id="friList"></div>
+    </section>
+
+    <section class="block">
+      <div class="block-heading">Sábado <span class="day-count" id="satCount"></span></div>
+      <div id="satList"></div>
+    </section>
+
+    <div class="footnote">Expert XP 2026 · Progresso salvo automaticamente neste iPhone</div>
+  </div>
+
+  <div class="view" id="viewRelacionamento" hidden>
+    <section class="block">
+      <div class="block-heading">Novo Registro</div>
+      <div class="form-card">
+        <div class="field" id="fieldClient">
+          <div class="field-label">
+            <span>Nome do cliente</span>
+          </div>
+          <input class="field-input" id="inputClient" type="text" placeholder="Ex: João Pereira" maxlength="120" autocomplete="off">
+          <div class="field-error">Informe o nome do cliente.</div>
+        </div>
+
+        <div class="field" id="fieldAccount">
+          <div class="field-label">
+            <span>Código conta</span>
+            <span class="optional-tag">Opcional</span>
+          </div>
+          <input class="field-input" id="inputAccount" type="text" placeholder="Ex: 123456-7" maxlength="40" autocomplete="off">
+        </div>
+
+        <div class="field" id="fieldRecord">
+          <div class="field-label">
+            <span>Registro do relacionamento</span>
+            <span class="char-count" id="charCount">0/500</span>
+          </div>
+          <textarea class="field-textarea" id="inputRecord" placeholder="Descreva o contato, decisões e próximos passos com o cliente..." maxlength="500"></textarea>
+          <div class="field-error">Descreva o registro do relacionamento.</div>
+        </div>
+
+        <button class="btn-primary" id="btnAddRecord">Adicionar Registro</button>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="records-header-row">
+        <div class="block-heading" style="margin-bottom: 0;">Histórico <span class="day-count" id="recordsCount"></span></div>
+        <button class="btn-secondary" id="btnDownloadCsv">⬇︎ Baixar CSV</button>
+      </div>
+      <div id="recordsList"></div>
+    </section>
+
+    <div class="footnote">Registros salvos automaticamente neste iPhone</div>
+  </div>
+</main>
+
+<div class="tabbar">
+  <button class="tab-btn active" id="tabJornadaBtn" data-tab="jornada" aria-label="Jornada">
+    <span class="tab-icon">🏆</span>
+    <span class="tab-label">Jornada</span>
+  </button>
+  <button class="tab-btn" id="tabRelacionamentoBtn" data-tab="relacionamento" aria-label="Relacionamento">
+    <span class="tab-icon">🤝</span>
+    <span class="tab-label">Relacionamento</span>
+  </button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ============ DADOS DA AGENDA ============
+  var SESSIONS = [
+    { id: 'fri-1', day: 'fri', time: '10:30', title: 'Os rumos da economia brasileira', stage: 'Expert Session', desc: 'Contexto macroeconômico.', icon: '📈' },
+    { id: 'fri-2', day: 'fri', time: '11:25', title: 'Política Monetária', stage: 'Expert Session', desc: 'Banco Central.', icon: '🏛️' },
+    { id: 'fri-3', day: 'fri', time: '13:20', title: 'IA como diferencial competitivo', stage: 'Pop Up Financial Lab', desc: 'Produtividade do consultor.', icon: '🤖' },
+    { id: 'fri-4', day: 'fri', time: '14:00', title: 'Proteção e Prosperidade', stage: 'Learning Session 04', desc: 'Planejamento patrimonial.', icon: '🛡️' },
+    { id: 'fri-5', day: 'fri', time: '14:40', title: 'Gestão, Cultura e Escala', stage: 'Advisor Stage', desc: 'Benchmark das maiores consultorias.', icon: '🧭' },
+    { id: 'fri-6', day: 'fri', time: '15:20', title: 'Novo ambiente competitivo', stage: 'Advisor Stage', desc: 'Fidelização de clientes.', icon: '🤝' },
+    { id: 'fri-7', day: 'fri', time: '16:25', title: 'Uma conversa com Mike Pompeo', stage: 'Expert Session', desc: 'Geopolítica.', icon: '🌍' },
+    { id: 'fri-8', day: 'fri', time: '17:20', title: 'Xadrez dos Gestores', stage: 'Expert Session', desc: 'Como pensam os maiores gestores.', icon: '♟️' },
+    { id: 'sat-1', day: 'sat', time: '11:30', title: 'Transformar Talento em Profissão', stage: 'Pop Up Financial Lab', desc: 'Advisor do futuro.', icon: '🚀' },
+    { id: 'sat-2', day: 'sat', time: '12:25', title: 'Gestão Patrimonial Moderna', stage: 'Pop Up Financial Lab', desc: 'Private Banking.', icon: '💼' },
+    { id: 'sat-3', day: 'sat', time: '12:25', title: 'Tributação de Dividendos', stage: 'Pop Up InfoMoney', desc: 'Planejamento Tributário.', icon: '📊' },
+    { id: 'sat-4', day: 'sat', time: '13:20', title: 'Assessoria do Futuro', stage: 'Pop Up Financial Lab', desc: 'Modelo consultivo.', icon: '🔮' },
+    { id: 'sat-5', day: 'sat', time: '14:40', title: 'Liga XP Awards', stage: 'Expert Session', desc: 'Benchmark B2C.', icon: '🏆' },
+    { id: 'sat-6', day: 'sat', time: '16:35', title: 'Brazil Advisor Awards', stage: 'Expert Session', desc: 'Melhores práticas.', icon: '🥇' }
+  ];
+
+  var BADGES = [
+    { key: 'explorador', icon: '🥉', label: 'Explorador', threshold: 25 },
+    { key: 'estrategista', icon: '🥈', label: 'Estrategista', threshold: 50 },
+    { key: 'trusted', icon: '🥇', label: 'Trusted Advisor', threshold: 75 },
+    { key: 'master', icon: '👑', label: 'Master Consultant', threshold: 100 }
+  ];
+
+  var STORAGE_KEY = 'expertxp2026_progress';
+  var TOTAL = SESSIONS.length;
+
+  // ============ ESTADO ============
+  var state = loadState();
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      /* armazenamento indisponível — segue sem persistência */
+    }
+  }
+
+  // ============ RENDERIZAÇÃO DE CARDS ============
+  function buildCard(session) {
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.id = session.id;
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-pressed', 'false');
+
+    card.innerHTML =
+      '<div class="card-checkbox">' +
+        '<div class="circle">' +
+          '<svg class="checkmark" viewBox="0 0 24 24" fill="none">' +
+            '<path d="M4 12.5L9.5 18L20 6.5" stroke="#0a0a0a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '</svg>' +
+        '</div>' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<div class="card-top-row">' +
+          '<span class="card-time">' + session.time + '</span>' +
+          '<span class="card-icon">' + session.icon + '</span>' +
+        '</div>' +
+        '<div class="card-title">' + session.title + '</div>' +
+        '<div class="card-stage">' + session.stage + '</div>' +
+        '<div class="card-desc">' + session.desc + '</div>' +
+      '</div>';
+
+    card.addEventListener('click', function () { toggleSession(session.id); });
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleSession(session.id);
+      }
+    });
+
+    return card;
+  }
+
+  function renderAgenda() {
+    var friList = document.getElementById('friList');
+    var satList = document.getElementById('satList');
+    friList.innerHTML = '';
+    satList.innerHTML = '';
+
+    SESSIONS.forEach(function (session) {
+      var card = buildCard(session);
+      (session.day === 'fri' ? friList : satList).appendChild(card);
+    });
+
+    updateCardStates();
+  }
+
+  function updateCardStates() {
+    SESSIONS.forEach(function (session) {
+      var card = document.querySelector('.card[data-id="' + session.id + '"]');
+      if (!card) return;
+      var done = !!state[session.id];
+      card.classList.toggle('completed', done);
+      card.setAttribute('aria-pressed', done ? 'true' : 'false');
+    });
+
+    var friDone = SESSIONS.filter(function (s) { return s.day === 'fri' && state[s.id]; }).length;
+    var satDone = SESSIONS.filter(function (s) { return s.day === 'sat' && state[s.id]; }).length;
+    var friTotal = SESSIONS.filter(function (s) { return s.day === 'fri'; }).length;
+    var satTotal = SESSIONS.filter(function (s) { return s.day === 'sat'; }).length;
+
+    document.getElementById('friCount').textContent = '· ' + friDone + '/' + friTotal;
+    document.getElementById('satCount').textContent = '· ' + satDone + '/' + satTotal;
+  }
+
+  // ============ BADGES ============
+  function renderBadges() {
+    var row = document.getElementById('badgesRow');
+    row.innerHTML = '';
+    BADGES.forEach(function (badge) {
+      var el = document.createElement('div');
+      el.className = 'badge';
+      el.dataset.key = badge.key;
+      el.innerHTML =
+        '<span class="badge-icon">' + badge.icon + '</span>' +
+        '<span class="badge-label">' + badge.label + '</span>' +
+        '<span class="badge-threshold">' + badge.threshold + '%</span>';
+      row.appendChild(el);
+    });
+  }
+
+  function updateBadges(percent) {
+    BADGES.forEach(function (badge) {
+      var el = document.querySelector('.badge[data-key="' + badge.key + '"]');
+      if (!el) return;
+      var shouldUnlock = percent >= badge.threshold;
+      var isUnlocked = el.classList.contains('unlocked');
+      if (shouldUnlock && !isUnlocked) {
+        el.classList.add('unlocked');
+      } else if (!shouldUnlock && isUnlocked) {
+        el.classList.remove('unlocked');
+      }
+    });
+  }
+
+  // ============ PROGRESSO ============
+  function updateProgress() {
+    var completedCount = SESSIONS.filter(function (s) { return state[s.id]; }).length;
+    var percent = Math.round((completedCount / TOTAL) * 100);
+
+    document.getElementById('sessionsLabel').textContent = completedCount + ' de ' + TOTAL + ' sessões';
+    document.getElementById('percentLabel').textContent = percent + '% concluído';
+    document.getElementById('progressFill').style.width = percent + '%';
+
+    updateBadges(percent);
+  }
+
+  // ============ AÇÕES ============
+  function toggleSession(id) {
+    state[id] = !state[id];
+    saveState();
+    updateCardStates();
+    updateProgress();
+  }
+
+  // ============ TABS ============
+  var HEADER_COPY = {
+    jornada: { title: '🏆 Jornada Expert XP 2026', subtitle: 'Trilha Premium do Consultor XP' },
+    relacionamento: { title: '🤝 Registro de Relacionamento', subtitle: 'Histórico de interações com clientes' }
+  };
+
+  function switchTab(tab) {
+    var viewJornada = document.getElementById('viewJornada');
+    var viewRelacionamento = document.getElementById('viewRelacionamento');
+    var tabJornadaBtn = document.getElementById('tabJornadaBtn');
+    var tabRelacionamentoBtn = document.getElementById('tabRelacionamentoBtn');
+    var progressBlock = document.getElementById('progressBlock');
+
+    var isJornada = tab === 'jornada';
+
+    viewJornada.hidden = !isJornada;
+    viewRelacionamento.hidden = isJornada;
+    progressBlock.style.display = isJornada ? '' : 'none';
+
+    tabJornadaBtn.classList.toggle('active', isJornada);
+    tabRelacionamentoBtn.classList.toggle('active', !isJornada);
+    tabJornadaBtn.setAttribute('aria-selected', isJornada ? 'true' : 'false');
+    tabRelacionamentoBtn.setAttribute('aria-selected', !isJornada ? 'true' : 'false');
+
+    var copy = HEADER_COPY[tab];
+    document.getElementById('headerTitle').textContent = copy.title;
+    document.getElementById('headerSubtitle').textContent = copy.subtitle;
+
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  function initTabs() {
+    document.getElementById('tabJornadaBtn').addEventListener('click', function () { switchTab('jornada'); });
+    document.getElementById('tabRelacionamentoBtn').addEventListener('click', function () { switchTab('relacionamento'); });
+  }
+
+  // ============ REGISTRO DE RELACIONAMENTO ============
+  var RECORDS_STORAGE_KEY = 'expertxp2026_relationship_records';
+  var RECORD_MAX_LENGTH = 500;
+  var records = loadRecords();
+
+  function loadRecords() {
+    try {
+      var raw = localStorage.getItem(RECORDS_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveRecords() {
+    try {
+      localStorage.setItem(RECORDS_STORAGE_KEY, JSON.stringify(records));
+    } catch (e) {
+      /* armazenamento indisponível — segue sem persistência */
+    }
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function formatDate(iso) {
+    var d = new Date(iso);
+    var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
+    return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear() +
+      ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  }
+
+  function updateCharCount() {
+    var textarea = document.getElementById('inputRecord');
+    var count = textarea.value.length;
+    document.getElementById('charCount').textContent = count + '/' + RECORD_MAX_LENGTH;
+  }
+
+  function validateRecordForm() {
+    var clientInput = document.getElementById('inputClient');
+    var recordInput = document.getElementById('inputRecord');
+    var fieldClient = document.getElementById('fieldClient');
+    var fieldRecord = document.getElementById('fieldRecord');
+
+    var clientValid = clientInput.value.trim().length > 0;
+    var recordValid = recordInput.value.trim().length > 0;
+
+    fieldClient.classList.toggle('invalid', !clientValid);
+    fieldRecord.classList.toggle('invalid', !recordValid);
+
+    return clientValid && recordValid;
+  }
+
+  function addRecord() {
+    if (!validateRecordForm()) return;
+
+    var clientInput = document.getElementById('inputClient');
+    var accountInput = document.getElementById('inputAccount');
+    var recordInput = document.getElementById('inputRecord');
+
+    var record = {
+      id: 'rec-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+      client: clientInput.value.trim(),
+      account: accountInput.value.trim(),
+      text: recordInput.value.trim().slice(0, RECORD_MAX_LENGTH),
+      createdAt: new Date().toISOString()
+    };
+
+    records.unshift(record);
+    saveRecords();
+    renderRecords();
+
+    clientInput.value = '';
+    accountInput.value = '';
+    recordInput.value = '';
+    updateCharCount();
+    document.getElementById('fieldClient').classList.remove('invalid');
+    document.getElementById('fieldRecord').classList.remove('invalid');
+
+    showToast('Registro adicionado');
+    clientInput.focus();
+  }
+
+  function deleteRecord(id) {
+    records = records.filter(function (r) { return r.id !== id; });
+    saveRecords();
+    renderRecords();
+    showToast('Registro removido');
+  }
+
+  function recordAsText(record) {
+    var lines = ['Cliente: ' + record.client];
+    if (record.account) lines.push('Conta: ' + record.account);
+    lines.push('Data: ' + formatDate(record.createdAt));
+    lines.push('Registro: ' + record.text);
+    return lines.join('\n');
+  }
+
+  function copyRecord(id, btn) {
+    var record = records.filter(function (r) { return r.id === id; })[0];
+    if (!record) return;
+    var text = recordAsText(record);
+
+    var done = function () {
+      showToast('Copiado para a área de transferência');
+      if (btn) {
+        btn.classList.add('copied');
+        setTimeout(function () { btn.classList.remove('copied'); }, 1200);
+      }
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopy(text, done); });
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+
+  function fallbackCopy(text, done) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      done();
+    } catch (e) {
+      showToast('Não foi possível copiar');
+    }
+  }
+
+  function csvEscape(value) {
+    var str = String(value == null ? '' : value);
+    if (/[",\n;]/.test(str)) {
+      str = '"' + str.replace(/"/g, '""') + '"';
+    }
+    return str;
+  }
+
+  function downloadCsv() {
+    if (records.length === 0) {
+      showToast('Nenhum registro para exportar');
+      return;
+    }
+
+    var header = ['Nome do Cliente', 'Codigo Conta', 'Data', 'Registro do Relacionamento'];
+    var rows = records.map(function (r) {
+      return [r.client, r.account, formatDate(r.createdAt), r.text].map(csvEscape).join(';');
+    });
+    var csvContent = '\uFEFF' + header.join(';') + '\n' + rows.join('\n');
+
+    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    var stamp = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = 'registros_relacionamento_' + stamp + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    showToast('CSV baixado');
+  }
+
+  function buildRecordCard(record) {
+    var card = document.createElement('div');
+    card.className = 'record-card';
+    card.innerHTML =
+      '<div class="record-top-row">' +
+        '<div>' +
+          '<div class="record-client">' + escapeHtml(record.client) + '</div>' +
+          (record.account ? '<div class="record-account">Conta ' + escapeHtml(record.account) + '</div>' : '') +
+        '</div>' +
+        '<div class="record-date">' + formatDate(record.createdAt) + '</div>' +
+      '</div>' +
+      '<div class="record-text">' + escapeHtml(record.text) + '</div>' +
+      '<div class="record-actions">' +
+        '<button class="record-action-btn copy" data-action="copy">📋 Copiar</button>' +
+        '<button class="record-action-btn delete" data-action="delete">🗑️ Remover</button>' +
+      '</div>';
+
+    var copyBtn = card.querySelector('[data-action="copy"]');
+    var deleteBtn = card.querySelector('[data-action="delete"]');
+
+    copyBtn.addEventListener('click', function () { copyRecord(record.id, copyBtn); });
+    deleteBtn.addEventListener('click', function () { deleteRecord(record.id); });
+
+    return card;
+  }
+
+  function renderRecords() {
+    var list = document.getElementById('recordsList');
+    var countLabel = document.getElementById('recordsCount');
+    var downloadBtn = document.getElementById('btnDownloadCsv');
+
+    list.innerHTML = '';
+    countLabel.textContent = records.length > 0 ? '· ' + records.length : '';
+    downloadBtn.disabled = records.length === 0;
+
+    if (records.length === 0) {
+      var empty = document.createElement('div');
+      empty.className = 'empty-state';
+      empty.innerHTML = '<span class="empty-icon">📝</span>Nenhum registro ainda.<br>Adicione o primeiro contato com o cliente acima.';
+      list.appendChild(empty);
+      return;
+    }
+
+    records.forEach(function (record) {
+      list.appendChild(buildRecordCard(record));
+    });
+  }
+
+  // ============ TOAST ============
+  var toastTimer = null;
+  function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toast.classList.remove('show');
+    }, 2000);
+  }
+
+  function initRecordForm() {
+    var recordInput = document.getElementById('inputRecord');
+    recordInput.addEventListener('input', updateCharCount);
+    document.getElementById('btnAddRecord').addEventListener('click', addRecord);
+    document.getElementById('btnDownloadCsv').addEventListener('click', downloadCsv);
+  }
+
+  // ============ INICIALIZAÇÃO ============
+  function init() {
+    renderBadges();
+    renderAgenda();
+    updateProgress();
+
+    initTabs();
+    initRecordForm();
+    renderRecords();
+    updateCharCount();
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+
+</body>
+</html>
